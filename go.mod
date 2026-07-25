@@ -1,10 +1,18 @@
 module github.com/fthdns/gomart
 
-go 1.26.5
+go 1.26
 
 require github.com/shopspring/decimal v1.4.0
 
-require github.com/urfave/cli/v3 v3.10.1
+require (
+	github.com/unrolled/render v1.7.0
+	github.com/urfave/cli/v3 v3.10.1
+)
+
+require (
+	github.com/fsnotify/fsnotify v1.6.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
+)
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect

@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/fthdns/gomart/app/database/seeders"
+	"github.com/fthdns/gomart/database/seeders"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/urfave/cli/v3"
@@ -144,7 +144,4 @@ func Run() {
 		server.Initialize(appConfig, dbConfig)
 		server.Run(":" + appConfig.AppPort)
 	}
-
-	server.Initialize(appConfig, dbConfig)
-	server.Run(": " + appConfig.AppPort)
 }
