@@ -1,15 +1,14 @@
-package app
+package controllers
 
 import (
 	"net/http"
 
-	"github.com/fthdns/gomart/app/controllers"
 	"github.com/gorilla/mux"
 )
 
 func (server *Server) InitializeRoutes() {
 	server.Router = mux.NewRouter()
-	server.Router.HandleFunc("/", controllers.Home).Methods("GET")
+	server.Router.HandleFunc("/", Home).Methods("GET")
 
 	staticFileDirectory := http.Dir("./assets/")
 	staticFileHandler := http.StripPrefix("/public/", http.FileServer(staticFileDirectory))
