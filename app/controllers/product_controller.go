@@ -28,7 +28,14 @@ func (server *Server) Products(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println("====", totalRows)
+	pagination, _ := GetPaginationLinks(server.AppConfig, PaginationParams{
+		Path:        "products",
+		TotalRows:   int32(totalRows),
+		PerPage:     int32(perPage),
+		CurrentPage: int32(page),
+	})
+
+	fmt.Println("===", pagination)
 
 	_ = render.HTML(w, http.StatusOK, "products", map[string]interface{}{
 		"products": products,
