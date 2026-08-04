@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -35,9 +34,8 @@ func (server *Server) Products(w http.ResponseWriter, r *http.Request) {
 		CurrentPage: int32(page),
 	})
 
-	fmt.Println("===", pagination)
-
 	_ = render.HTML(w, http.StatusOK, "products", map[string]interface{}{
-		"products": products,
+		"products":   products,
+		"pagination": pagination,
 	})
 }
