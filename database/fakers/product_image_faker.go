@@ -18,16 +18,12 @@ func ProductImageFaker(db *gorm.DB) *models.ProductImage {
 	}
 
 	return &models.ProductImage{
-		ID:         uuid.New().String(),
-		Product:    models.Product{},
-		ProductID:  product.ID,
-		Path:       faker.URL(),
-		ExtraLarge: faker.URL(),
-		Large:      faker.URL(),
-		Medium:     faker.URL(),
-		Small:      faker.URL(),
-		CreatedAt:  time.Time{},
-		UpdatedAt:  time.Time{},
-		DeletedAt:  gorm.DeletedAt{},
+		ID:        uuid.New().String(),
+		Product:   models.Product{},
+		ProductID: product.ID,
+		Path:      faker.URL(),
+		CreatedAt: time.Time{},
+		UpdatedAt: time.Time{},
+		DeletedAt: gorm.DeletedAt{},
 	}
 }
