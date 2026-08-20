@@ -28,3 +28,22 @@ func (c *Cart) GetCart(db *gorm.DB, cartID string) (*Cart, error) {
 
 	return &cart, nil
 }
+
+func (c *Cart) CreateCart(db *gorm.DB, cartID string) (*Cart, error) {
+	cart := &Cart{
+		ID:              cartID,
+		BaseTotalPrice:  decimal.NewFromInt(0),
+		TaxAmount:       decimal.NewFromInt(0),
+		TaxPercent:      decimal.NewFromInt(11),
+		DiscountAmount:  decimal.NewFromInt(0),
+		DiscountPercent: decimal.NewFromInt(0),
+		GrandTotal:      decimal.NewFromInt(0),
+	}
+
+	err := db.Debug().Create(&cart).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return cart, nil
+}

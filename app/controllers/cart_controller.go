@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"uuid"
+
+	"github.com/google/uuid"
 
 	"github.com/fthdns/gomart/app/models"
 	"gorm.io/gorm"
@@ -15,10 +16,10 @@ func GetShoppingCartID(w http.ResponseWriter, r *http.Request) string {
 
 	if session.Values["cart-id"] == nil {
 		session.Values["cart-id"] = uuid.New().String()
-		session.Save(r, w)
+		_ = session.Save(r, w)
 	}
 
-	return fmt.Sprint("%s", session.Values["cart-id"])
+	return fmt.Sprintf("%s", session.Values["cart-id"])
 }
 
 func GetShoppingCart(db *gorm.DB, cartID string) (*models.Cart, error) {
@@ -30,6 +31,7 @@ func GetShoppingCart(db *gorm.DB, cartID string) (*models.Cart, error) {
 		existCart, _ = cart.CreateCart(db, cartID)
 	}
 
+	fmt.Println(existCart)
 	return existCart, nil
 }
 
@@ -56,6 +58,8 @@ func (server *Server) AddItemToCart(w http.ResponseWriter, r *http.Request) {
 
 	cartID := GetShoppingCartID(w, r)
 	cart, _ = GetShoppingCart(server.DB, cartID)
+
+	fmt.Println("cart id ===> ", cart.ID)
 
 	http.Redirect(w, r, "/carts", http.StatusSeeOther)
 }

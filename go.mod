@@ -5,6 +5,7 @@ go 1.26
 require github.com/shopspring/decimal v1.4.0
 
 require (
+	github.com/gorilla/sessions v1.4.0
 	github.com/unrolled/render v1.7.0
 	github.com/urfave/cli/v3 v3.10.1
 )
@@ -12,7 +13,6 @@ require (
 require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
-	github.com/gorilla/sessions v1.4.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 )
 
