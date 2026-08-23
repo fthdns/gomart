@@ -12,7 +12,7 @@ import (
 )
 
 func GetShoppingCartID(w http.ResponseWriter, r *http.Request) string {
-	session, _ := store.Get(r, "shopping-cart-session")
+	session, _ := store.Get(r, sessionShoppingCart)
 
 	if session.Values["cart-id"] == nil {
 		session.Values["cart-id"] = uuid.New().String()
@@ -58,8 +58,10 @@ func (server *Server) AddItemToCart(w http.ResponseWriter, r *http.Request) {
 
 	cartID := GetShoppingCartID(w, r)
 	cart, _ = GetShoppingCart(server.DB, cartID)
-
-	fmt.Println("cart id ===> ", cart.ID)
+	_, err = cart.AddItem(server.DB, models.CartItem{
+		ProductID: productId,
+		Qty:       qty,
+	})
 
 	http.Redirect(w, r, "/carts", http.StatusSeeOther)
 }
